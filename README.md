@@ -33,6 +33,10 @@
 
 ## 装
 
+**这个包没有任何运行依赖。** 不需要先装别的插件，`node_modules` 里只会多出 `whale-memory` 一个目录。
+
+那 8 个 `@deepseek-ai/*` peer 依赖是 **DSH 宿主自带的内部模块**（cordis、dsh-agent、dsh-llm、schemastery 等），由宿主提供，不会从 npm 下载，也不用你手动装。
+
 ```bash
 # 在你的 profile 目录里
 pnpm add whale-memory
@@ -40,7 +44,11 @@ pnpm add whale-memory
 
 或者从插件市场装（搜 `whale-memory`）。
 
+**就这些。** 没有第二步前置条件。
+
 **装完它默认是关着的**（`disabled: true`）。这是故意的：如果机器上已经有另一个记忆插件（比如 `dsh-world`），两个同时开会把两份记忆块插进同一次请求，DSH 启动是**全有全无**，一个插件加载失败整个进程就退出了。宁可多一次点击，也不能让别人的 DSH 起不来。
+
+唯一需要处理的「已有插件」是**另一个记忆插件**——安装器会检测并让你选，这不是依赖，是冲突。
 
 ## 开
 
