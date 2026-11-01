@@ -1,0 +1,67 @@
+{
+  "name": "whale-memory",
+  "version": "0.1.0",
+  "description": "Cross-session memory for a DSH companion: the recent conversation in front of her, and a small file saying where she stopped. No console, no life line, no stop switch.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "memory",
+    "companion",
+    "agent"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "templates",
+    "cordis.patch.yml",
+    "install.mjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "build": "node -e \"require('fs').rmSync('lib',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test \"tests/*.test.ts\"",
+    "install-into": "node install.mjs",
+    "prepack": "node node_modules/typescript/bin/tsc --noEmit && node -e \"require('fs').rmSync('lib',{recursive:true,force:true})\" && node node_modules/typescript/bin/tsc -p tsconfig.build.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.1-rc.2": "compatible"
+      }
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-agent": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-home-paths": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-llm": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-session": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-session-persistence": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-token-meter": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.2",
+    "@types/node": "^22.16.0",
+    "typescript": "^5.9.3"
+  }
+}

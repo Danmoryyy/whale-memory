@@ -1,0 +1,18 @@
+# whale-memory — the memory line for a DSH companion.
+#
+# Shipped DISABLED on purpose. Installing the plugin must never be able to break a running DSH:
+# if another memory plugin (e.g. dsh-world) is already on, both would inject a memory block into
+# the same request and the host refuses to start ("cannot locate retained injected context"),
+# and DSH startup is all-or-nothing. So the package arrives installed and quiet, and the profile
+# decides when it takes over.
+#
+# To start it, either:
+#   - run `node install.mjs` (checks for conflicts, backs up, then writes this row enabled), or
+#   - set `disabled: false` on this row in the profile's cordis.patch.yml, or
+#   - use the plugin market's enable toggle.
+#
+# Never enable two memory plugins at once.
+- insert:
+    - id: whale-memory
+      name: whale-memory
+      disabled: true
